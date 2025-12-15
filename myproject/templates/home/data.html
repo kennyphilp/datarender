@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renfrewshire School Rolls Data</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/data-page.css' %}">
+</head>
+<body>
+    <div class="data-container">
+        <h1>Renfrewshire School Rolls Data</h1>
+        
+        <!-- Error container for user feedback -->
+        <div id="errorContainer" style="display: none;" role="alert" aria-live="polite"></div>
+        
+        <div class="filters-box">
+        <div class="filters-row">
+        <div class="filter-container">
+            <label class="filter-label" for="nameFilterList">Filter by School Name:</label>
+            <div id="nameFilterList" class="filter-list" role="group" aria-label="School name filter checkboxes">
+                <!-- Checkbox options populated by JavaScript -->
+            </div>
+            <div class="filter-actions">
+                <button id="selectAllSchoolsBtn" class="filter-button" aria-label="Select all schools">Select All</button>
+                <button id="clearAllSchoolsBtn" class="filter-button secondary" aria-label="Clear all school selections">Clear All</button>
+                <span id="selectedCount" class="selected-count" aria-live="polite">0 schools selected</span>
+            </div>
+        </div>
+
+        <div class="filter-container">
+            <label class="filter-label" for="sectorFilterList">Filter by Sector:</label>
+            <div id="sectorFilterList" class="filter-list" role="group" aria-label="Sector filter checkboxes">
+                <!-- Checkbox options populated by JS -->
+            </div>
+            <div class="filter-actions">
+                <button id="selectAllSectorsBtn" class="filter-button" aria-label="Select all sectors">Select All</button>
+                <button id="clearAllSectorsBtn" class="filter-button secondary" aria-label="Clear all sector selections">Clear All</button>
+                <span id="sectorCount" class="selected-count" aria-live="polite">0 sectors selected</span>
+            </div>
+        </div>
+
+        <div class="filter-container">
+            <label class="filter-label" for="typeFilterList">Filter by School Type:</label>
+            <div id="typeFilterList" class="filter-list" role="group" aria-label="School type filter checkboxes">
+                <!-- Checkbox options populated by JS -->
+            </div>
+            <div class="filter-actions">
+                <button id="selectAllTypesBtn" class="filter-button" aria-label="Select all school types">Select All</button>
+                <button id="clearAllTypesBtn" class="filter-button secondary" aria-label="Clear all school type selections">Clear All</button>
+                <span id="typeCount" class="selected-count" aria-live="polite">0 types selected</span>
+            </div>
+        </div>
+        </div>
+        
+        <div id="content" role="region" aria-label="School data table" aria-live="polite">
+            <div class="loading">Loading data...</div>
+        </div>
+        <nav class="pagination-controls" style="margin-top: var(--spacing-md); display:flex; gap:8px; align-items:center;" aria-label="Pagination">
+            <button id="prevPageBtn" class="filter-button" aria-label="Go to previous page">Prev</button>
+            <button id="nextPageBtn" class="filter-button" aria-label="Go to next page">Next</button>
+            <div id="pageInfo" style="color: var(--color-text-secondary); margin-left: 8px;" aria-live="polite">Page: 1</div>
+        </nav>
+        
+        <div class="graph-container">
+            <h2>Enrollment Trends</h2>
+            <div id="graph-content" role="img" aria-label="Enrollment trends graph">
+                <div class="loading">Select schools to view enrollment trends</div>
+            </div>
+            <div style="margin-top: var(--spacing-sm);">
+                <button id="exportGraphBtn" class="filter-button" disabled aria-label="Export enrollment graph as PNG">Export Graph</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/data-page.js' %}"></script>
+</body>
+</html>
