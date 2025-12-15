@@ -30,4 +30,3 @@ __pypackages__/
 *.env.local
 .idea/
 datastore.db
-datafiles/Historic_School_Rolls_1996_to_2018.csv
