@@ -1,0 +1,339 @@
+/* Extracted page-specific styles for data.html */
+.data-container {
+    padding: var(--spacing-xl);
+    max-width: 1600px; /* Increased max-width */
+    margin: 0 auto;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    /* Use automatic table layout so columns size to their content (longest value) */
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+th, td {
+    border: 1px solid var(--color-border);
+    padding: 2px 4px;
+    text-align: left;
+    font-size: var(--font-size-sm);
+    white-space: nowrap; /* keep all table content on a single row */
+}
+/* Reduce padding for year column headers - must come after general th, td rule */
+table th.year-col { padding: 1px 2px !important; }
+table td.year-col { padding: 1px 2px !important; }
+th {
+    background-color: var(--color-surface-elevated);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+th:hover { background-color: var(--color-surface-hover); }
+th.sorted-asc::after { content: ' ▲'; color: var(--color-accent); }
+th.sorted-desc::after { content: ' ▼'; color: var(--color-accent); }
+tr:nth-child(even) { background-color: var(--color-surface-hover); }
+tr:hover { background-color: var(--color-surface-hover); }
+.year-col { width: 45px; min-width: 45px; max-width: 45px; text-align: center; font-size: 0.75rem; }
+.name-col, th[data-column="Name"] { padding: 2px 3px !important; }
+.sector-col { width: 80px; max-width: 80px; padding: 2px 3px !important; }
+.school-type-col { width: 60px; max-width: 60px; padding: 2px 3px !important; }
+.loading, .error { text-align: center; padding: var(--spacing-2xl); color: var(--color-text-secondary); }
+.filter-container { margin-bottom: var(--spacing-lg); padding: var(--spacing-md); background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+.filter-label { display: block; margin-bottom: var(--spacing-sm); font-weight: var(--font-weight-medium); color: var(--color-text-primary); }
+.filter-select { width: 100%; max-width: 400px; padding: var(--spacing-sm); background-color: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-sm); color: var(--color-text-primary); font-family: var(--font-primary); }
+.filter-select option { background-color: var(--color-surface); color: var(--color-text-primary); }
+.filter-actions { margin-top: var(--spacing-sm); }
+.filter-button { padding: var(--spacing-xs) var(--spacing-sm); background-color: var(--color-primary); color: white; border: none; border-radius: var(--radius-sm); cursor: pointer; font-size: var(--font-size-sm); margin-right: var(--spacing-sm); transition: background-color var(--transition-fast); }
+.filter-button:hover { background-color: var(--color-primary-hover); }
+.filter-button.secondary { background-color: var(--color-surface-elevated); color: var(--color-text-primary); }
+.filter-button.secondary:hover { background-color: var(--color-surface-hover); }
+.selected-count { font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-left: var(--spacing-sm); }
+.filters-row { display: flex; gap: var(--spacing-md); align-items: flex-start; justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: var(--spacing-md); white-space: nowrap; }
+.filters-row .filter-container { flex: 0 0 auto; width: 340px; min-width: 220px; margin-bottom: 0; }
+.filters-row .filter-container:nth-child(2), .filters-row .filter-container:nth-child(3) { width: 220px; }
+.filters-row .filter-select { white-space: normal; overflow: hidden; }
+.filter-list { max-height: 220px; overflow: auto; padding: var(--spacing-xs); background-color: var(--color-surface-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-sm); }
+
+/* Dark-mode friendly scrollbar for filter lists */
+.filter-list {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--color-border-light) var(--color-surface-elevated); /* thumb track */
+}
+
+/* WebKit scrollbar styling */
+.filter-list::-webkit-scrollbar { width: 10px; height: 10px; }
+.filter-list::-webkit-scrollbar-track { background: var(--color-surface-elevated); border-radius: 8px; }
+.filter-list::-webkit-scrollbar-thumb { background-color: var(--color-border-light); border-radius: 8px; border: 2px solid var(--color-surface-elevated); }
+.filter-list::-webkit-scrollbar-thumb:hover { background-color: var(--color-border); }
+.filter-list label { display: flex; align-items: center; gap: 8px; padding: 4px 6px; cursor: pointer; color: var(--color-text-primary); font-size: var(--font-size-sm); }
+.filter-list input[type="checkbox"] {
+    /* Use custom appearance so we can style the control like the dark scrollbar */
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    background: #1a1a1a; /* track color */
+    border: 1px solid #2b2b2b;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.filter-list input[type="checkbox"]:hover {
+    border-color: #444444;
+}
+
+.filter-list input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+}
+
+/* Checked state: dark thumb with white check mark (SVG data URI) */
+.filter-list input[type="checkbox"]:checked {
+    background: #444444; /* thumb color */
+    border-color: #444444;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 12px 12px;
+}
+
+/* Touch/fallback: keep a visible background on older webkits */
+.filter-list input[type="checkbox"]::-webkit-checkbox {
+    background-color: #1a1a1a;
+}
+/* Remove cell-name styling; all cells use nowrap so content stays on one line */
+.cell-name { display: inline-block; }
+.filter-select option:checked { background-color: var(--color-primary) !important; color: white !important; }
+.filter-select option:checked::-webkit-text-fill-color { color: white !important; }
+.filters-box { border: 1px solid var(--color-border); border-radius: var(--radius-md); background-color: var(--color-surface); padding: var(--spacing-md); margin-bottom: var(--spacing-md); }
+.filters-box .filter-container { border: none; padding: 0; background: transparent; }
+.graph-container { margin-top: var(--spacing-xl); padding: var(--spacing-lg); background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+.graph-container h2 { margin-top: 0; margin-bottom: var(--spacing-md); color: var(--color-text-primary); }
+#graph-content { text-align: center; min-height: 200px; display: flex; align-items: center; justify-content: center; }
+#graph-content img { max-width: 100%; height: auto; border-radius: var(--radius-sm); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); }
+
+/* Ensure the table container can scroll horizontally without overflowing the outer box */
+#content { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* Default scrollbar styling for the table container (non-dark-mode) */
+#content {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--color-border-light) var(--color-surface-elevated);
+}
+
+#content::-webkit-scrollbar { width: 10px; height: 10px; }
+#content::-webkit-scrollbar-track { background: #1a1a1a; border-radius: 8px; }
+#content::-webkit-scrollbar-thumb { background-color: #444444; border-radius: 8px; border: 2px solid #1a1a1a; }
+#content::-webkit-scrollbar-thumb:hover { background-color: #666666; }
+
+/* Error message styling */
+.error-message {
+    background-color: #dc2626;
+    color: white;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+}
+
+.error-message .retry-btn,
+.error-message .dismiss-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+}
+
+.error-message .dismiss-btn {
+    font-size: 1.5rem;
+    line-height: 1;
+    padding: 0 var(--spacing-sm);
+}
+
+.error-message .retry-btn:hover,
+.error-message .dismiss-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Design - Mobile First */
+
+/* Small mobile devices (portrait phones, less than 576px) */
+@media (max-width: 575px) {
+    .data-container {
+        padding: var(--spacing-md);
+    }
+    
+    .filters-row {
+        flex-direction: column;
+        overflow-x: visible;
+    }
+    
+    .filters-row .filter-container {
+        width: 100%;
+        min-width: 100%;
+    }
+    
+    .filters-row .filter-container:nth-child(2),
+    .filters-row .filter-container:nth-child(3) {
+        width: 100%;
+    }
+    
+    /* Make table horizontally scrollable on mobile */
+    #content {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    table {
+        min-width: 600px;
+        font-size: 0.75rem;
+    }
+    
+    th, td {
+        padding: 4px 6px;
+        font-size: 0.7rem;
+    }
+    
+    .year-col {
+        width: 40px;
+        min-width: 40px;
+        font-size: 0.65rem;
+    }
+    
+    .name-col, th[data-column="Name"] {
+        padding: 2px 3px !important;
+    }
+    
+    .graph-container {
+        padding: var(--spacing-md);
+    }
+    
+    .filter-actions {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    
+    .filter-button {
+        width: 100%;
+        margin-right: 0;
+    }
+    
+    .pagination-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.25rem;
+    }
+}
+
+/* Medium devices (tablets, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .filters-row {
+        flex-wrap: wrap;
+    }
+    
+    .filters-row .filter-container {
+        flex: 1 1 calc(50% - var(--spacing-md));
+        min-width: 250px;
+    }
+    
+    .filters-row .filter-container:nth-child(3) {
+        flex: 1 1 100%;
+    }
+}
+
+/* Large tablets and small desktops (768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .data-container {
+        padding: var(--spacing-lg);
+    }
+    
+    .filters-row .filter-container {
+        width: 280px;
+    }
+}
+
+/* Large desktops (1200px and up) */
+@media (min-width: 1200px) {
+    .data-container {
+        max-width: 1400px;
+    }
+    
+    .filters-row {
+        justify-content: space-between;
+    }
+    
+    .filters-row .filter-container {
+        flex: 1;
+        max-width: 400px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .filter-container,
+    .pagination-controls,
+    .filter-button {
+        display: none;
+    }
+    
+    .data-container {
+        padding: 0;
+    }
+    
+    table {
+        font-size: 10pt;
+    }
+    
+    .graph-container {
+        page-break-inside: avoid;
+    }
+}
+
+/* Accessibility: Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Dark mode support (if user prefers dark mode) */
+@media (prefers-color-scheme: dark) {
+    /* Already using dark theme, no additional changes needed */
+
+    /* Dark-mode friendly scrollbar for the table container */
+    #content {
+        scrollbar-width: thin; /* Firefox */
+        scrollbar-color: var(--color-border-light) var(--color-surface-elevated);
+    }
+
+    /* WebKit scrollbar styling for the table container */
+    #content::-webkit-scrollbar { width: 10px; height: 10px; }
+    #content::-webkit-scrollbar-track { background: var(--color-surface-elevated); border-radius: 8px; }
+    #content::-webkit-scrollbar-thumb { background-color: var(--color-border-light); border-radius: 8px; border: 2px solid var(--color-surface-elevated); }
+    #content::-webkit-scrollbar-thumb:hover { background-color: var(--color-border); }
+}
+
